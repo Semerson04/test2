@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoughSync — All Your Bakery Orders in One Place</title>
+    <style>
+        :root {
+            --primary: #d97706;
+            --primary-dark: #b45309;
+            --bg: #fffbeb;
+            --card-bg: #ffffff;
+            --text: #1f2937;
+            --text-light: #4b5563;
+            --border: #f3f4f6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 0 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        h1 {
+            font-size: 2rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: #111827;
+        }
+
+        h1 span {
+            color: var(--primary);
+        }
+
+        .subheadline {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 0.875rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: #fef3c7;
+        }
+
+        section {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: #111827;
+        }
+
+        /* Problem Section */
+        .quote {
+            font-style: italic;
+            color: var(--text-light);
+            border-left: 4px solid var(--primary);
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Steps */
+        .step {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            background: var(--bg);
+            color: var(--primary);
+            font-weight: bold;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            font-size: 1rem;
+            margin-bottom: 0.25srem;
+        }
+
+        .step-content p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Pricing */
+        .pricing-box {
+            text-align: center;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 0.5rem 0;
+        }
+
+        .price span {
+            font-size: 1rem;
+            font-weight: normal;
+            color: var(--text-light);
+        }
+
+        /* Waiting list form */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        input[type="email"] {
+            padding: 0.875rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input[type="email"]:focus {
+            border-color: var(--primary);
+        }
+
+        .success-msg {
+            display: none;
+            background: #d1fae5;
+            color: #065f46;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            padding: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">DoughSync</div>
+        <h1>Never miss a custom cake note or allergy again.</h1>
+        <p class="subheadline">Every order channel—phone, DMs, email, and walk-ins—streamlined into one zero-stress dashboard.</p>
+        
+        <div class="cta-group">
+            <a href="app.html" class="btn btn-primary">Try the Interactive Demo</a>
+            <a href="#waitlist" class="btn btn-secondary">Join the Waiting List</a>
+        </div>
+    </header>
+
+    <section>
+        <h2>The Chaos is Real</h2>
+        <div class="quote">
+            "Orders come in through Instagram DMs, text messages, sticky notes, and phone calls while my hands are covered in flour. Last month we almost missed a severe peanut allergy because the request was buried in an email thread. I needed a fix built for bakers, not tech bros."
+        </div>
+        <p style="font-size: 0.9rem; color: var(--text-light); text-align: right;">— Bakery Owner, small-batch kitchen</p>
+    </section>
+
+    <section>
+        <h2>How It Works</h2>
+        <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <h3>Log Orders Instantly</h3>
+                <p>Type or paste orders from any conversation stream into one streamlined entry form.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <h3>Automated Allergy Flags</h3>
+                <p>Critical dietary and allergen data highlight automatically in bold red so they are never missed.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <h3>Kitchen-Ready View</h3>
+                <p>Filter by date or station so your baking team knows exactly what needs to go into the oven.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing-box">
+        <h2>Simple, Transparent Pricing</h2>
+        <div class="price">$29 <span>/ month</span></div>
+        <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem;">Flat rate per bakery. Unlimited orders, unlimited staff accounts.</p>
+        <a href="app.html" class="btn btn-secondary">Test Drive Free Demo</a>
+    </section>
+
+    <section id="waitlist">
+        <h2>Get Early Access</h2>
+        <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem;">We're onboarding a limited batch of local bakeries next month. Secure your spot.</p>
+        
+        <form id="waitlistForm" onsubmit="handleWaitlist(event)">
+            <input type="email" id="emailInput" placeholder="Enter your bakery email" required>
+            <button type="submit" class="btn btn-primary">Join the Waiting List</button>
+        </form>
+        <div id="successMessage" class="success-msg">You're on the list! We'll be in touch soon.</div>
+    </section>
+
+    <footer>
+        &copy; 2026 DoughSync. Built for independent bakeries.
+    </footer>
+
+    <script>
+        function handleWaitlist(event) {
+            event.preventDefault();
+            const form = document.getElementById('waitlistForm');
+            const successMsg = document.getElementById('successMessage');
+            
+            // Hide form and show success message (no backend data sent)
+            form.style.display = 'none';
+            successMsg.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
