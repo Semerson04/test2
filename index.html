@@ -16,6 +16,12 @@
             --border-color: #e2e8f0;
             --success-bg: #ecfdf5;
             --success-text: #065f46;
+
+            /* Channel Colors */
+            --chan-whatsapp: #25d366;
+            --chan-insta: #e1306c;
+            --chan-phone: #3b82f6;
+            --chan-walkin: #10b981;
         }
 
         * {
@@ -23,64 +29,130 @@
             margin: 0;
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
             background-color: var(--bg-page);
             color: var(--text-dark);
             line-height: 1.5;
-            padding: 1rem;
+            padding-top: 60px; /* Space for sticky nav */
+            max-width: 480px;
+            margin: 0 auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        /* Sticky Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            z-index: 1000;
             max-width: 480px;
             margin: 0 auto;
         }
 
-        /* Top Bar */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem 0 1.5rem 0;
-        }
-
         .brand-logo {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             font-weight: 800;
             color: var(--primary);
             letter-spacing: -0.025em;
+            text-decoration: none;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
         }
 
         .region-badge {
             background-color: #e0e7ff;
             color: #3730a3;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 700;
-            padding: 0.25rem 0.6rem;
+            padding: 0.2rem 0.5rem;
             border-radius: 9999px;
             text-transform: uppercase;
         }
 
-        /* Hero Section */
+        .nav-btn {
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.4rem 0.75rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+
+        /* Hero Header with Background Image */
         header {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .hero-bg-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-bg-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.9) 100%);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            padding: 2rem 1.25rem;
             text-align: left;
-            margin-bottom: 2rem;
         }
 
         h1 {
-            font-size: 2.1rem;
+            font-size: 1.9rem;
             font-weight: 800;
-            line-height: 1.15;
+            line-height: 1.2;
             letter-spacing: -0.03em;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
+            margin-bottom: 0.85rem;
+            color: #ffffff;
         }
 
         h1 span {
-            color: var(--primary);
+            color: #60a5fa;
         }
 
         .hero-subtitle {
-            font-size: 1.05rem;
-            color: var(--text-muted);
+            font-size: 1rem;
+            color: #cbd5e1;
             margin-bottom: 1.5rem;
         }
 
@@ -107,7 +179,7 @@
         .btn-primary {
             background-color: var(--primary);
             color: #ffffff;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
 
         .btn-primary:active {
@@ -115,9 +187,10 @@
         }
 
         .btn-secondary {
-            background-color: #ffffff;
-            color: var(--text-dark);
-            border: 1px solid var(--border-color);
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(4px);
         }
 
         /* Section Cards */
@@ -135,6 +208,7 @@
             font-weight: 700;
             margin-bottom: 0.75rem;
             letter-spacing: -0.01em;
+            color: var(--text-dark);
         }
 
         /* Quote / Pain Point */
@@ -147,6 +221,37 @@
             color: var(--text-muted);
             margin-bottom: 0.75rem;
             border-radius: 0 8px 8px 0;
+        }
+
+        /* Colour-Coded Channels Showcase */
+        .channel-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .channel-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 0.75rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .ch-whatsapp { background-color: var(--chan-whatsapp); }
+        .ch-insta { background-color: var(--chan-insta); }
+        .ch-phone { background-color: var(--chan-phone); }
+        .ch-walkin { background-color: var(--chan-walkin); }
+
+        .channel-dot {
+            width: 8px;
+            height: 8px;
+            background: #ffffff;
+            border-radius: 50%;
         }
 
         /* Step List */
@@ -179,6 +284,7 @@
             font-size: 0.95rem;
             font-weight: 600;
             margin-bottom: 0.1rem;
+            color: var(--text-dark);
         }
 
         .step-details p {
@@ -215,6 +321,7 @@
             font-size: 0.95rem;
             outline: none;
             background: #f8fafc;
+            color: var(--text-dark);
         }
 
         input[type="email"]:focus {
@@ -244,18 +351,29 @@
 </head>
 <body>
 
+    <!-- Sticky Navigation Bar -->
     <nav>
-        <div class="brand-logo">BakeDesk</div>
-        <div class="region-badge">Ireland</div>
+        <a href="#" class="brand-logo">BakeDesk</a>
+        <div class="nav-actions">
+            <span class="region-badge">Ireland</span>
+            <a href="app.html" class="nav-btn">Live Demo</a>
+        </div>
     </nav>
 
+    <!-- Hero Section with Background Image -->
     <header>
-        <h1>Stop losing custom bakery orders in <span>WhatsApp & DMs</span>.</h1>
-        <p class="hero-subtitle">Bring phone orders, Instagram DMs, and walk-in requests into one simple kitchen dashboard. Guaranteed zero missed allergen notes.</p>
-        
-        <div class="cta-group">
-            <a href="app.html" class="btn btn-primary">Try Interactive Demo</a>
-            <a href="#waitlist" class="btn btn-secondary">Join Early Access</a>
+        <div class="hero-bg-container">
+            <Image src="image_generation_content/13258878155556675859" alt="cozy artisan bakery counter with fresh sourdough bread, pastries, and a modern phone displaying an order app" />
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Stop losing custom orders in <span>WhatsApp & DMs</span>.</h1>
+            <p class="hero-subtitle">Bring phone orders, Instagram messages, and walk-in requests into one simple kitchen dashboard. Guaranteed zero missed allergen notes.</p>
+            
+            <div class="cta-group">
+                <a href="app.html" class="btn btn-primary">Try Interactive Demo</a>
+                <a href="#waitlist" class="btn btn-secondary">Join Early Access</a>
+            </div>
         </div>
     </header>
 
@@ -266,6 +384,27 @@
                 "It's 7 AM on Saturday. I'm flour-dusted trying to cross-reference Instagram DMs, paper dockets, and WhatsApp messages to check if the weekend birthday cake had a nut allergy. We need one central hub."
             </div>
             <p style="font-size: 0.85rem; color: var(--text-muted); text-align: right;">— Head Baker, Dublin 2</p>
+        </section>
+
+        <!-- Colour-Coded Channels Showcase -->
+        <section class="card">
+            <div class="card-header">All Channels. Colour-Coded.</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">Instantly spot where an order originated at a glance across your kitchen queue:</p>
+            
+            <div class="channel-grid">
+                <div class="channel-badge ch-whatsapp">
+                    <div class="channel-dot"></div> WhatsApp
+                </div>
+                <div class="channel-badge ch-insta">
+                    <div class="channel-dot"></div> Instagram DMs
+                </div>
+                <div class="channel-badge ch-phone">
+                    <div class="channel-dot"></div> Phone Call
+                </div>
+                <div class="channel-badge ch-walkin">
+                    <div class="channel-dot"></div> Walk-in Counter
+                </div>
+            </div>
         </section>
 
         <section class="card">
@@ -327,7 +466,6 @@
             const form = document.getElementById('waitlistForm');
             const successBox = document.getElementById('waitlistSuccess');
             
-            // Local mockup behavior - no remote data sent
             form.style.display = 'none';
             successBox.style.display = 'block';
         }
