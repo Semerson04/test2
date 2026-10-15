@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BakeDesk — Centralized Order Desk for Irish Bakeries & Cafes</title>
+    <title>BakeDesk — Central Order Management for Irish Bakeries & Cafes</title>
     <style>
         :root {
             --primary: #2563eb;
-            --primary-dark: #1d4ed8;
+            --primary-hover: #1d4ed8;
             --accent: #f59e0b;
-            --bg-main: #f8fafc;
+            --bg-page: #f8fafc;
             --card-bg: #ffffff;
-            --text-main: #0f172a;
+            --text-dark: #0f172a;
             --text-muted: #475569;
-            --border: #e2e8f0;
-            --danger-bg: #fef2f2;
-            --danger-text: #991b1b;
+            --border-color: #e2e8f0;
+            --success-bg: #ecfdf5;
+            --success-text: #065f46;
         }
 
         * {
@@ -26,8 +26,8 @@
         }
 
         body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
+            background-color: var(--bg-page);
+            color: var(--text-dark);
             line-height: 1.5;
             padding: 1rem;
             max-width: 480px;
@@ -42,14 +42,14 @@
             padding: 0.75rem 0 1.5rem 0;
         }
 
-        .brand {
+        .brand-logo {
             font-size: 1.25rem;
             font-weight: 800;
             color: var(--primary);
             letter-spacing: -0.025em;
         }
 
-        .badge {
+        .region-badge {
             background-color: #e0e7ff;
             color: #3730a3;
             font-size: 0.75rem;
@@ -59,7 +59,7 @@
             text-transform: uppercase;
         }
 
-        /* Hero Header */
+        /* Hero Section */
         header {
             text-align: left;
             margin-bottom: 2rem;
@@ -70,7 +70,7 @@
             font-weight: 800;
             line-height: 1.15;
             letter-spacing: -0.03em;
-            color: var(--text-main);
+            color: var(--text-dark);
             margin-bottom: 1rem;
         }
 
@@ -78,13 +78,13 @@
             color: var(--primary);
         }
 
-        .hero-sub {
+        .hero-subtitle {
             font-size: 1.05rem;
             color: var(--text-muted);
             margin-bottom: 1.5rem;
         }
 
-        .cta-container {
+        .cta-group {
             display: flex;
             flex-direction: column;
             gap: 0.75rem;
@@ -107,7 +107,7 @@
         .btn-primary {
             background-color: var(--primary);
             color: #ffffff;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
         }
 
         .btn-primary:active {
@@ -116,8 +116,8 @@
 
         .btn-secondary {
             background-color: #ffffff;
-            color: var(--text-main);
-            border: 1px solid var(--border);
+            color: var(--text-dark);
+            border: 1px solid var(--border-color);
         }
 
         /* Section Cards */
@@ -126,11 +126,11 @@
             border-radius: 16px;
             padding: 1.5rem;
             margin-bottom: 1.25rem;
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-color);
             box-shadow: 0 1px 3px rgba(0,0,0,0.02);
         }
 
-        .card-title {
+        .card-header {
             font-size: 1.15rem;
             font-weight: 700;
             margin-bottom: 0.75rem;
@@ -138,7 +138,7 @@
         }
 
         /* Quote / Pain Point */
-        .pain-quote {
+        .quote-box {
             background-color: #f8fafc;
             border-left: 3px solid var(--accent);
             padding: 0.85rem 1rem;
@@ -149,19 +149,19 @@
             border-radius: 0 8px 8px 0;
         }
 
-        /* Features List */
-        .feature-item {
+        /* Step List */
+        .step-row {
             display: flex;
             align-items: flex-start;
             gap: 0.75rem;
             margin-bottom: 1rem;
         }
 
-        .feature-item:last-child {
+        .step-row:last-child {
             margin-bottom: 0;
         }
 
-        .feature-icon {
+        .step-num {
             background: #eff6ff;
             color: var(--primary);
             font-weight: 700;
@@ -175,26 +175,26 @@
             font-size: 0.85rem;
         }
 
-        .feature-text h3 {
+        .step-details h3 {
             font-size: 0.95rem;
             font-weight: 600;
             margin-bottom: 0.1rem;
         }
 
-        .feature-text p {
+        .step-details p {
             font-size: 0.85rem;
             color: var(--text-muted);
         }
 
         /* Pricing Card */
-        .price-tag {
+        .price-display {
             font-size: 2.25rem;
             font-weight: 800;
-            color: var(--text-main);
+            color: var(--text-dark);
             margin: 0.5rem 0;
         }
 
-        .price-tag span {
+        .price-display span {
             font-size: 0.9rem;
             font-weight: 500;
             color: var(--text-muted);
@@ -210,7 +210,7 @@
         input[type="email"] {
             width: 100%;
             padding: 0.85rem;
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             font-size: 0.95rem;
             outline: none;
@@ -224,8 +224,8 @@
 
         .success-box {
             display: none;
-            background: #ecfdf5;
-            color: #065f46;
+            background: var(--success-bg);
+            color: var(--success-text);
             padding: 0.85rem;
             border-radius: 8px;
             font-size: 0.9rem;
@@ -245,15 +245,15 @@
 <body>
 
     <nav>
-        <div class="brand">BakeDesk</div>
-        <div class="badge">Ireland</div>
+        <div class="brand-logo">BakeDesk</div>
+        <div class="region-badge">Ireland</div>
     </nav>
 
     <header>
         <h1>Stop losing custom bakery orders in <span>WhatsApp & DMs</span>.</h1>
-        <p class="hero-sub">Bring phone orders, Instagram messages, and walk-ins into one central kitchen feed. Guaranteed zero missed allergen flags.</p>
+        <p class="hero-subtitle">Bring phone orders, Instagram DMs, and walk-in requests into one simple kitchen dashboard. Guaranteed zero missed allergen notes.</p>
         
-        <div class="cta-container">
+        <div class="cta-group">
             <a href="app.html" class="btn btn-primary">Try Interactive Demo</a>
             <a href="#waitlist" class="btn btn-secondary">Join Early Access</a>
         </div>
@@ -261,58 +261,58 @@
 
     <main>
         <section class="card">
-            <div class="card-title">The Daily Kitchen Reality</div>
-            <div class="pain-quote">
-                "It's 7 AM on Saturday. I'm flour-dusted trying to cross-reference Instagram DMs, paper dockets, and WhatsApp messages to check if the weekend birthday cake had a nut allergy. We need one simple system."
+            <div class="card-header">The Daily Kitchen Reality</div>
+            <div class="quote-box">
+                "It's 7 AM on Saturday. I'm flour-dusted trying to cross-reference Instagram DMs, paper dockets, and WhatsApp messages to check if the weekend birthday cake had a nut allergy. We need one central hub."
             </div>
             <p style="font-size: 0.85rem; color: var(--text-muted); text-align: right;">— Head Baker, Dublin 2</p>
         </section>
 
         <section class="card">
-            <div class="card-title">Built specifically for bakery teams</div>
+            <div class="card-header">Built for busy kitchen workflows</div>
             
-            <div class="feature-item">
-                <div class="feature-icon">1</div>
-                <div class="feature-text">
-                    <h3>Single Central Feed</h3>
-                    <p>Consolidate orders across DMs, phone calls, and walk-in requests into one clean queue.</p>
+            <div class="step-row">
+                <div class="step-num">1</div>
+                <div class="step-details">
+                    <h3>Single Central Queue</h3>
+                    <p>Log incoming orders from phone calls, WhatsApp messages, or walk-ins into one organized feed.</p>
                 </div>
             </div>
 
-            <div class="feature-item">
-                <div class="feature-icon">2</div>
-                <div class="feature-text">
+            <div class="step-row">
+                <div class="step-num">2</div>
+                <div class="step-details">
                     <h3>Automatic Allergen Highlighting</h3>
-                    <p>Dietary requirements and severe allergies are automatically flagged in high-visibility badges.</p>
+                    <p>Critical dietary requests and severe allergies stand out in bold red badges so they can't be missed.</p>
                 </div>
             </div>
 
-            <div class="feature-item">
-                <div class="feature-icon">3</div>
-                <div class="feature-text">
-                    <h3>Mobile Station Views</h3>
-                    <p>Filter by fulfillment date and prep station right from any smartphone or iPad in the kitchen.</p>
+            <div class="step-row">
+                <div class="step-num">3</div>
+                <div class="step-details">
+                    <h3>Mobile Prep Station Views</h3>
+                    <p>Filter by fulfillment date or kitchen station directly from any phone or tablet on the prep table.</p>
                 </div>
             </div>
         </section>
 
         <section class="card" style="text-align: center;">
-            <div class="card-title">Simple Flat Pricing</div>
-            <div class="price-tag">€39 <span>/ month</span></div>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;">Includes unlimited orders, unlimited kitchen users, and dedicated onboarding.</p>
+            <div class="card-header">Simple Flat Rate</div>
+            <div class="price-display">€39 <span>/ month</span></div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;">Includes unlimited orders, unlimited staff devices, and full onboarding support.</p>
             <a href="app.html" class="btn btn-primary">Try Interactive Demo</a>
         </section>
 
         <section id="waitlist" class="card">
-            <div class="card-title">Get Early Access in Ireland</div>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">We are onboarding 10 independent bakeries and cafes this month. Reserve your spot below.</p>
+            <div class="card-header">Get Early Access in Ireland</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">We are onboarding 10 independent bakeries and cafes this month. Reserve your place below.</p>
             
-            <form id="waitlistForm" onsubmit="submitForm(event)">
-                <input type="email" id="userEmail" placeholder="e.g. hello@yourbakery.ie" required>
+            <form id="waitlistForm" onsubmit="handleWaitlistSubmit(event)">
+                <input type="email" id="email" placeholder="e.g. hello@yourbakery.ie" required>
                 <button type="submit" class="btn btn-primary">Join Waitlist</button>
             </form>
-            <div id="successMessage" class="success-box">
-                Thanks! You've been added to the early access list.
+            <div id="waitlistSuccess" class="success-box">
+                Thanks! You're on the list. We'll be in touch with early access details soon.
             </div>
         </section>
     </main>
@@ -322,13 +322,14 @@
     </footer>
 
     <script>
-        function submitForm(event) {
-            event.preventDefault();
+        function handleWaitlistSubmit(e) {
+            e.preventDefault();
             const form = document.getElementById('waitlistForm');
-            const successMsg = document.getElementById('successMessage');
+            const successBox = document.getElementById('waitlistSuccess');
             
+            // Local mockup behavior - no remote data sent
             form.style.display = 'none';
-            successMsg.style.display = 'block';
+            successBox.style.display = 'block';
         }
     </script>
 
