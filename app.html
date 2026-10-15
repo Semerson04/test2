@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hello World</title>
+<style>
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; background: #222; color: #fff; font-family: sans-serif; overflow: hidden; }
+  h1 { position: relative; transition: transform 0.5s ease; }
+  button { padding: 10px 20px; font-size: 16px; cursor: pointer; background: #ff4757; color: white; border: none; border-radius: 5px; }
+</style>
+</head>
+<body>
+  <h1 id="text">Hello World!</h1>
+  <button onclick="moveText()">Click Me</button>
+<script>
+  let pos = 0;
+  function moveText() {
+    pos += 60;
+    document.getElementById('text').style.transform = `translateX(${pos % 300 - 150}px)`;
+  }
+</script>
+</body>
+</html>
