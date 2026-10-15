@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DoughSync — All Your Bakery Orders in One Place</title>
+    <title>BakeDesk — Centralized Order Desk for Irish Bakeries & Cafes</title>
     <style>
         :root {
-            --primary: #d97706;
-            --primary-dark: #b45309;
-            --bg: #fffbeb;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --accent: #f59e0b;
+            --bg-main: #f8fafc;
             --card-bg: #ffffff;
-            --text: #1f2937;
-            --text-light: #4b5563;
-            --border: #f3f4f6;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border: #e2e8f0;
+            --danger-bg: #fef2f2;
+            --danger-text: #991b1b;
         }
 
         * {
@@ -23,161 +26,181 @@
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.5;
             padding: 1rem;
-            max-width: 600px;
+            max-width: 480px;
             margin: 0 auto;
         }
 
-        header {
-            text-align: center;
-            padding: 2rem 0 1rem 0;
+        /* Top Bar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0 1.5rem 0;
         }
 
-        .logo {
+        .brand {
             font-size: 1.25rem;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--primary);
-            margin-bottom: 0.5rem;
+            letter-spacing: -0.025em;
+        }
+
+        .badge {
+            background-color: #e0e7ff;
+            color: #3730a3;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+        }
+
+        /* Hero Header */
+        header {
+            text-align: left;
+            margin-bottom: 2rem;
         }
 
         h1 {
-            font-size: 2rem;
-            line-height: 1.2;
+            font-size: 2.1rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            color: var(--text-main);
             margin-bottom: 1rem;
-            color: #111827;
         }
 
         h1 span {
             color: var(--primary);
         }
 
-        .subheadline {
-            font-size: 1.1rem;
-            color: var(--text-light);
+        .hero-sub {
+            font-size: 1.05rem;
+            color: var(--text-muted);
             margin-bottom: 1.5rem;
         }
 
-        .cta-group {
+        .cta-container {
             display: flex;
             flex-direction: column;
             gap: 0.75rem;
-            margin-bottom: 2rem;
         }
 
         .btn {
-            display: block;
+            display: inline-block;
             width: 100%;
-            padding: 0.875rem 1.5rem;
+            padding: 0.9rem 1.25rem;
             font-size: 1rem;
             font-weight: 600;
             text-align: center;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
             border: none;
-            transition: background-color 0.2s;
+            transition: all 0.2s ease;
         }
 
         .btn-primary {
             background-color: var(--primary);
-            color: white;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
         }
 
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
+        .btn-primary:active {
+            transform: scale(0.98);
         }
 
         .btn-secondary {
-            background-color: white;
-            color: var(--primary);
-            border: 2px solid var(--primary);
+            background-color: #ffffff;
+            color: var(--text-main);
+            border: 1px solid var(--border);
         }
 
-        .btn-secondary:hover {
-            background-color: #fef3c7;
-        }
-
-        section {
+        /* Section Cards */
+        .card {
             background: var(--card-bg);
+            border-radius: 16px;
             padding: 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin-bottom: 1.25rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
         }
 
-        h2 {
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-            color: #111827;
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
         }
 
-        /* Problem Section */
-        .quote {
+        /* Quote / Pain Point */
+        .pain-quote {
+            background-color: #f8fafc;
+            border-left: 3px solid var(--accent);
+            padding: 0.85rem 1rem;
             font-style: italic;
-            color: var(--text-light);
-            border-left: 4px solid var(--primary);
-            padding-left: 1rem;
-            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            border-radius: 0 8px 8px 0;
         }
 
-        /* Steps */
-        .step {
+        /* Features List */
+        .feature-item {
             display: flex;
-            gap: 1rem;
+            align-items: flex-start;
+            gap: 0.75rem;
             margin-bottom: 1rem;
         }
 
-        .step:last-child {
+        .feature-item:last-child {
             margin-bottom: 0;
         }
 
-        .step-number {
-            background: var(--bg);
+        .feature-icon {
+            background: #eff6ff;
             color: var(--primary);
-            font-weight: bold;
-            width: 32px;
-            height: 32px;
+            font-weight: 700;
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
             flex-shrink: 0;
+            font-size: 0.85rem;
         }
 
-        .step-content h3 {
-            font-size: 1rem;
-            margin-bottom: 0.25srem;
+        .feature-text h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.1rem;
         }
 
-        .step-content p {
-            font-size: 0.9rem;
-            color: var(--text-light);
+        .feature-text p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
         }
 
-        /* Pricing */
-        .pricing-box {
-            text-align: center;
-        }
-
-        .price {
-            font-size: 2.5rem;
+        /* Pricing Card */
+        .price-tag {
+            font-size: 2.25rem;
             font-weight: 800;
-            color: var(--primary);
+            color: var(--text-main);
             margin: 0.5rem 0;
         }
 
-        .price span {
-            font-size: 1rem;
-            font-weight: normal;
-            color: var(--text-light);
+        .price-tag span {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
         }
 
-        /* Waiting list form */
+        /* Form Controls */
         form {
             display: flex;
             flex-direction: column;
@@ -185,110 +208,125 @@
         }
 
         input[type="email"] {
-            padding: 0.875rem;
-            border: 1px solid #d1d5db;
+            width: 100%;
+            padding: 0.85rem;
+            border: 1px solid var(--border);
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             outline: none;
+            background: #f8fafc;
         }
 
         input[type="email"]:focus {
             border-color: var(--primary);
+            background: #ffffff;
         }
 
-        .success-msg {
+        .success-box {
             display: none;
-            background: #d1fae5;
+            background: #ecfdf5;
             color: #065f46;
-            padding: 1rem;
+            padding: 0.85rem;
             border-radius: 8px;
-            text-align: center;
+            font-size: 0.9rem;
             font-weight: 600;
+            text-align: center;
+            border: 1px solid #a7f3d0;
         }
 
         footer {
             text-align: center;
             font-size: 0.8rem;
-            color: var(--text-light);
-            padding: 2rem 0;
+            color: var(--text-muted);
+            padding: 1.5rem 0;
         }
     </style>
 </head>
 <body>
 
+    <nav>
+        <div class="brand">BakeDesk</div>
+        <div class="badge">Ireland</div>
+    </nav>
+
     <header>
-        <div class="logo">DoughSync</div>
-        <h1>Never miss a custom cake note or allergy again.</h1>
-        <p class="subheadline">Every order channel—phone, DMs, email, and walk-ins—streamlined into one zero-stress dashboard.</p>
+        <h1>Stop losing custom bakery orders in <span>WhatsApp & DMs</span>.</h1>
+        <p class="hero-sub">Bring phone orders, Instagram messages, and walk-ins into one central kitchen feed. Guaranteed zero missed allergen flags.</p>
         
-        <div class="cta-group">
-            <a href="app.html" class="btn btn-primary">Try the Interactive Demo</a>
-            <a href="#waitlist" class="btn btn-secondary">Join the Waiting List</a>
+        <div class="cta-container">
+            <a href="app.html" class="btn btn-primary">Try Interactive Demo</a>
+            <a href="#waitlist" class="btn btn-secondary">Join Early Access</a>
         </div>
     </header>
 
-    <section>
-        <h2>The Chaos is Real</h2>
-        <div class="quote">
-            "Orders come in through Instagram DMs, text messages, sticky notes, and phone calls while my hands are covered in flour. Last month we almost missed a severe peanut allergy because the request was buried in an email thread. I needed a fix built for bakers, not tech bros."
-        </div>
-        <p style="font-size: 0.9rem; color: var(--text-light); text-align: right;">— Bakery Owner, small-batch kitchen</p>
-    </section>
-
-    <section>
-        <h2>How It Works</h2>
-        <div class="step">
-            <div class="step-number">1</div>
-            <div class="step-content">
-                <h3>Log Orders Instantly</h3>
-                <p>Type or paste orders from any conversation stream into one streamlined entry form.</p>
+    <main>
+        <section class="card">
+            <div class="card-title">The Daily Kitchen Reality</div>
+            <div class="pain-quote">
+                "It's 7 AM on Saturday. I'm flour-dusted trying to cross-reference Instagram DMs, paper dockets, and WhatsApp messages to check if the weekend birthday cake had a nut allergy. We need one simple system."
             </div>
-        </div>
-        <div class="step">
-            <div class="step-number">2</div>
-            <div class="step-content">
-                <h3>Automated Allergy Flags</h3>
-                <p>Critical dietary and allergen data highlight automatically in bold red so they are never missed.</p>
-            </div>
-        </div>
-        <div class="step">
-            <div class="step-number">3</div>
-            <div class="step-content">
-                <h3>Kitchen-Ready View</h3>
-                <p>Filter by date or station so your baking team knows exactly what needs to go into the oven.</p>
-            </div>
-        </div>
-    </section>
+            <p style="font-size: 0.85rem; color: var(--text-muted); text-align: right;">— Head Baker, Dublin 2</p>
+        </section>
 
-    <section class="pricing-box">
-        <h2>Simple, Transparent Pricing</h2>
-        <div class="price">$29 <span>/ month</span></div>
-        <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem;">Flat rate per bakery. Unlimited orders, unlimited staff accounts.</p>
-        <a href="app.html" class="btn btn-secondary">Test Drive Free Demo</a>
-    </section>
+        <section class="card">
+            <div class="card-title">Built specifically for bakery teams</div>
+            
+            <div class="feature-item">
+                <div class="feature-icon">1</div>
+                <div class="feature-text">
+                    <h3>Single Central Feed</h3>
+                    <p>Consolidate orders across DMs, phone calls, and walk-in requests into one clean queue.</p>
+                </div>
+            </div>
 
-    <section id="waitlist">
-        <h2>Get Early Access</h2>
-        <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem;">We're onboarding a limited batch of local bakeries next month. Secure your spot.</p>
-        
-        <form id="waitlistForm" onsubmit="handleWaitlist(event)">
-            <input type="email" id="emailInput" placeholder="Enter your bakery email" required>
-            <button type="submit" class="btn btn-primary">Join the Waiting List</button>
-        </form>
-        <div id="successMessage" class="success-msg">You're on the list! We'll be in touch soon.</div>
-    </section>
+            <div class="feature-item">
+                <div class="feature-icon">2</div>
+                <div class="feature-text">
+                    <h3>Automatic Allergen Highlighting</h3>
+                    <p>Dietary requirements and severe allergies are automatically flagged in high-visibility badges.</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">3</div>
+                <div class="feature-text">
+                    <h3>Mobile Station Views</h3>
+                    <p>Filter by fulfillment date and prep station right from any smartphone or iPad in the kitchen.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="card" style="text-align: center;">
+            <div class="card-title">Simple Flat Pricing</div>
+            <div class="price-tag">€39 <span>/ month</span></div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;">Includes unlimited orders, unlimited kitchen users, and dedicated onboarding.</p>
+            <a href="app.html" class="btn btn-primary">Try Interactive Demo</a>
+        </section>
+
+        <section id="waitlist" class="card">
+            <div class="card-title">Get Early Access in Ireland</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">We are onboarding 10 independent bakeries and cafes this month. Reserve your spot below.</p>
+            
+            <form id="waitlistForm" onsubmit="submitForm(event)">
+                <input type="email" id="userEmail" placeholder="e.g. hello@yourbakery.ie" required>
+                <button type="submit" class="btn btn-primary">Join Waitlist</button>
+            </form>
+            <div id="successMessage" class="success-box">
+                Thanks! You've been added to the early access list.
+            </div>
+        </section>
+    </main>
 
     <footer>
-        &copy; 2026 DoughSync. Built for independent bakeries.
+        &copy; 2026 BakeDesk Ireland. Built for artisan bakers & cafes.
     </footer>
 
     <script>
-        function handleWaitlist(event) {
+        function submitForm(event) {
             event.preventDefault();
             const form = document.getElementById('waitlistForm');
             const successMsg = document.getElementById('successMessage');
             
-            // Hide form and show success message (no backend data sent)
             form.style.display = 'none';
             successMsg.style.display = 'block';
         }
